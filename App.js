@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, ScrollView } from "react-native";
 import { getLatestGames } from "./lib/metacritic";
 
 export default function App() {
@@ -15,14 +15,16 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      {games.map((game) => (
-        <View key={game.slug} style={styles.card}>
-          <Image
-            source={{ uri: game.image }}
-            style={{ width: 107, height: 147, borderRadius: 10 }}
-          />
-        </View>
-      ))}
+      <ScrollView>
+        {games.map((game) => (
+          <View key={game.slug} style={styles.card}>
+            <Image source={{ uri: game.image }} style={styles.image} />
+            <Text style={styles.title}>{game.title}</Text>
+            <Text style={styles.score}>{game.score}</Text>
+            <Text style={styles.description}>{game.description}</Text>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 }
@@ -34,5 +36,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  card: {},
+  card: {
+    marginBottom: 42,
+  },
+  image: {
+    width: 107,
+    height: 147,
+    borderRadius: 10,
+  },
+  title: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "bold",
+    marginTop: 10,
+  },
+  description: {
+    color: "#eee",
+    fontSize: 14,
+    marginTop: 5,
+  },
+  score: {
+    color: "green",
+    fontWeight: "bold",
+    fontSize: 20,
+    marginBottom: 10,
+  },
 });
