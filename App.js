@@ -1,14 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  SafeAreaView,
-} from "react-native";
+import { Image, StyleSheet, Text, View, ScrollView } from "react-native";
 import { getLatestGames } from "./lib/metacritic";
+import Constants from "expo-constants";
 
 export default function App() {
   const [games, setGames] = useState([]);
@@ -22,18 +16,16 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <SafeAreaView style={{ margin: 24 }}>
-        <ScrollView>
-          {games.map((game) => (
-            <View key={game.slug} style={styles.card}>
-              <Image source={{ uri: game.image }} style={styles.image} />
-              <Text style={styles.title}>{game.title}</Text>
-              <Text style={styles.score}>{game.score}</Text>
-              <Text style={styles.description}>{game.description}</Text>
-            </View>
-          ))}
-        </ScrollView>
-      </SafeAreaView>
+      <ScrollView>
+        {games.map((game) => (
+          <View key={game.slug} style={styles.card}>
+            <Image source={{ uri: game.image }} style={styles.image} />
+            <Text style={styles.title}>{game.title}</Text>
+            <Text style={styles.score}>{game.score}</Text>
+            <Text style={styles.description}>{game.description}</Text>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 }
@@ -44,6 +36,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: Constants.statusBarHeight,
+    padding: 16,
   },
   card: {
     marginBottom: 42,
