@@ -1,11 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { useEffect, useState } from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { getLatestGames } from "./lib/metacritic";
 
 export default function App() {
+  const [games, setGames] = useState([]);
+
+  useEffect(() => {
+    getLatestGames().then((games) => {
+      setGames(games);
+    });
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
+      {games.map((game) => (
+        <View key={game.slug} style={styles.card}>
+          <Image
+            source={{ uri: game.image }}
+            style={{ width: 107, height: 147, borderRadius: 10 }}
+          />
+        </View>
+      ))}
     </View>
   );
 }
@@ -13,8 +30,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#000",
+    alignItems: "center",
+    justifyContent: "center",
   },
+  card: {},
 });
