@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "expo-router";
 import { View, FlatList, ActivityIndicator } from "react-native";
 import { getLatestGames } from "../lib/metacritic";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -20,6 +21,9 @@ export function Main() {
       <View style={{ marginBottom: 20 }}>
         <Logo />
       </View>
+      <Link href="/about" className="text-blue-400">
+        Ir al about
+      </Link>
       {games.length === 0 ? (
         <ActivityIndicator color={"#fff"} size="large" />
       ) : (
