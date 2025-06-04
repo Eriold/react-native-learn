@@ -13,19 +13,15 @@ import { Link } from "expo-router";
 export function GameCard({ game }) {
   return (
     <Link asChild href={`/${game.slug}`}>
-      <Pressable className="active:opacity-70 border border-black active:border-white/50 active:border-2 mb-2 bg-zinc-900 rounded-xl p-4">
-        <View key={game.slug} className="flex-row gap-4 mb-4">
-          <Image
-            className="flex-shrink-0"
-            source={{ uri: game.image }}
-            style={styles.image}
-          />
-          <View>
+      <Pressable className="active:opacity-70 border border-black active:border-white/50 mb-2 active:border-2 bg-zinc-900 rounded-xl p-4">
+        <View key={game.slug} className="flex-row gap-4">
+          <Image source={{ uri: game.image }} style={styles.image} />
+          <View className="flex-shrink">
             <Text className="mb-1" style={styles.title}>
               {game.title}
             </Text>
             <Score score={game.score} maxScore={100} />
-            <Text className="mt-2 flex-shrink-0" style={styles.description}>
+            <Text className="mt-2 flex-shrink" style={styles.description}>
               {game.description}
             </Text>
           </View>
