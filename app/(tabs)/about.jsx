@@ -1,7 +1,7 @@
 import { Link } from "expo-router";
 import { Text, ScrollView, Pressable } from "react-native";
-import { HomeIcon } from "../components/Icons";
-import { Screen } from "../components/Screen";
+import { HomeIcon } from "../../components/Icons";
+import { Screen } from "../../components/Screen";
 
 const About = () => {
   return (
